@@ -1,13 +1,16 @@
-use std::convert;
 use scraper::{Html, Selector, ElementRef};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
+
+
+#[derive(Debug, Deserialize, Serialize)]
 pub enum Plarform {
     Amazon,
 }
 
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
+
 pub struct Product {
     pub id: String,
     pub title: String,
@@ -18,24 +21,33 @@ pub struct Product {
     pub nb_review: Option<usize>,
 }
 
-impl From<ElementRef<'_>> for Product 
+impl Product 
 {
-    fn from(element: ElementRef) -> Self {
+    pub fn from(element: ElementRef) -> Option<Self>{
 
 
         let title_selector = Selector::parse("h2>a>span").unwrap();
         let price = Selector::parse("span[class='a-price-whole']").unwrap();
-        let url_selector = Selector::parse("h2>a").unwrap();
+        let _url_selector = Selector::parse("h2>a").unwrap();
         
-        let id = element.value().attr("data-asin").unwrap();
+        let id = match element.value().attr("data-asin"){
+            Some(id) => id.to_string(),
+            None => return None,
+        };
+        
         let title = match element.select(&title_selector).next() {
             Some(value) => value.inner_html(),
-            None => String::from(""),
+            None => return None,
         };
         let price: f32 = match element.select(&price).next() {
             Some(v) => {
-                v.inner_html().replace(',', ".").parse().unwrap()},
-            None => 0.0,
+                if let Ok(v2) = v.inner_html().replace(',', ".").parse(){
+                    v2
+                }else{
+                    return None;
+                }
+            },
+            None => return None,
         };
         let product = Product{
             id: id.to_string(),
@@ -47,7 +59,7 @@ impl From<ElementRef<'_>> for Product
             nb_review: None,
         };
         println!("{:?}", product);
-        product
+        Some(product)
     }
 }
     

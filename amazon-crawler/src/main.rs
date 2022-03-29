@@ -1,14 +1,12 @@
 
 pub mod product;
 
-extern crate select;
 
-use reqwest;
 
 use scraper::{Html, Selector};
 use crate::product::*;
 use lazy_static::lazy_static; // 1.4.0
-use std::sync::Mutex;
+use std::{sync::Mutex, path::Path, io::{self, BufRead}, fs::File};
 
 
 lazy_static! {
@@ -17,7 +15,7 @@ lazy_static! {
 
 
 
-async fn get_amazon_product_list(url: &str) -> Result<String, reqwest::Error> {
+async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
     let client = reqwest::ClientBuilder::new()
             .gzip(true)
             .build()?;
@@ -31,21 +29,42 @@ async fn get_amazon_product_list(url: &str) -> Result<String, reqwest::Error> {
     let html = Html::parse_document(&body);
 
     let s_selector = Selector::parse("div[data-asin]").unwrap();
-
     let mut products = PRODUCTS.lock().unwrap();
     for element in html.select(&s_selector) {
-        products.push(Product::from(element));
-        println!();
+        if let Some(product) = Product::from(element) {
+            products.push(product);
+        }
     }
+    Ok(())
+}
     
         
-    Ok(String::from(""))
+
+
+fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
+where P: AsRef<Path>, {
+    let file = File::open(filename)?;
+    Ok(io::BufReader::new(file).lines())
 }
 
 #[tokio::main]
 async fn main() {
-    
-    let re = get_amazon_product_list("https://www.amazon.fr/gp/new-releases/?ref_=nav_cs_newreleases").await;
+    if let Ok(lines) = read_lines("top.json") {
+        // Consumes the iterator, returns an (Optional) String
+        for line in lines.flatten() {
+
+            for i in  1..7{
+                let _re = get_amazon_product_list(&format!("https://www.amazon.fr/s?k={}&page={}",line, i)).await;
+
+            }
+            let mut products = PRODUCTS.lock().unwrap();
+
+            serde_json::to_writer(&File::create("data.json").unwrap(), &products.as_slice());
+                
+            
+        }
+    }
+   
     
     
     
