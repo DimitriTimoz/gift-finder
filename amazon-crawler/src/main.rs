@@ -5,8 +5,9 @@ pub mod product;
 
 use scraper::{Html, Selector};
 use crate::product::*;
-use lazy_static::lazy_static; // 1.4.0
-use std::{sync::Mutex, path::Path, io::{self, BufRead}, fs::File};
+use lazy_static::lazy_static; use core::time;
+// 1.4.0
+use std::{sync::Mutex, path::Path, io::{self, BufRead}, fs::File, thread};
 
 
 lazy_static! {
@@ -25,16 +26,23 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
         .send().await?;
 
     let body = res.text().await?;
-
     let html = Html::parse_document(&body);
 
     let s_selector = Selector::parse("div[data-asin]").unwrap();
     let mut products = PRODUCTS.lock().unwrap();
+    let mut total=0;
+    let mut n_exists=0;
     for element in html.select(&s_selector) {
         if let Some(product) = Product::from(element) {
-            products.push(product);
+            if !products.iter().any(|p| p.id == product.id) {
+                products.push(product);
+            }else {
+                n_exists+=1;
+            }
+            total+=1;
         }
     }
+    println!("{}/{} ", total-n_exists ,total);
     Ok(())
 }
     
@@ -55,21 +63,21 @@ async fn main() {
 
             for i in  1..7{
                 let _re = get_amazon_product_list(&format!("https://www.amazon.fr/s?k={}&page={}",line, i)).await;
+                let products = PRODUCTS.lock().unwrap();
+                thread::sleep(time::Duration::from_millis(1000));
+                println!("{} produits", products.len());
+                
 
             }
-            let mut products = PRODUCTS.lock().unwrap();
+            let products = PRODUCTS.lock().unwrap();
 
-            serde_json::to_writer(&File::create("data.json").unwrap(), &products.as_slice());
+            let _ = serde_json::to_writer(&File::create("data.json").unwrap(), &products.as_slice());
                 
             
         }
     }
    
     
-    
-    
-    // Rust call async function synchronously
-    // tokio::run(get_amazon_product_list(url));
 
     
 }
