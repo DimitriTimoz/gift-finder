@@ -1,4 +1,4 @@
-use scraper::{Html, Selector, ElementRef};
+use scraper::{Selector, ElementRef};
 use serde::{Deserialize, Serialize};
 
 
@@ -28,8 +28,8 @@ impl Product
 
         let title_selector = Selector::parse("h2>a>span").unwrap();
         let price = Selector::parse("span[class='a-price-whole']").unwrap();
-        let _url_selector = Selector::parse("h2>a").unwrap();
-        
+
+        let review_selector = Selector::parse("a>i>span").unwrap();
         let id = match element.value().attr("data-asin"){
             Some(id) => id.to_string(),
             None => return None,
@@ -50,7 +50,7 @@ impl Product
             None => return None,
         };
         let product = Product{
-            id: id.to_string(),
+            id,
             title,
             price,
             platform: Plarform::Amazon,
@@ -58,7 +58,6 @@ impl Product
             review: None,
             nb_review: None,
         };
-        println!("{:?}", product);
         Some(product)
     }
 }
