@@ -49,13 +49,28 @@ impl Product
             },
             None => return None,
         };
+
+        let review = match element.select(&review_selector).next() {
+            Some(v) => {
+               
+                let v4 = v.inner_html().replace(',', ".");
+                match v4[0..3].parse::<f32>() {
+                    Ok(v) => Some(v/5.0),
+                    Err(_) => None,
+                }   
+                                 
+            },
+            None => None,
+        };
+            
+        
         let product = Product{
             id,
             title,
             price,
             platform: Plarform::Amazon,
             images_url: vec![],
-            review: None,
+            review,
             nb_review: None,
         };
         Some(product)
