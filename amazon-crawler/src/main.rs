@@ -20,9 +20,17 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
     let client = reqwest::ClientBuilder::new()
             .gzip(true)
             .build()?;
+    
+    // To break the patern
+    let mut rng = rand::thread_rng();
+    let mut users_agents = read_lines("user-agents.csv").unwrap();
+    let n: usize = rng.gen_range(0..1000);
+    let users_agents = users_agents.nth(n).unwrap().unwrap();
+
+    // Request
     let res = client.post(url)
         .header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
-        .header("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36")
+        .header("user-agent", &users_agents)
         .send().await?;
 
     let body = res.text().await?;
