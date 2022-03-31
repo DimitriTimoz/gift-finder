@@ -18,7 +18,9 @@ lazy_static! {
 
 
 async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
+    let proxy = reqwest::Proxy::all("socks5://127.0.0.1:9050")?;
     let client = reqwest::ClientBuilder::new()
+            .proxy(proxy)
             .gzip(true)
             .build()?;
     
