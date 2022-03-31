@@ -13,6 +13,7 @@ use rand::Rng;
 
 lazy_static! {
     static ref PRODUCTS: Mutex<Vec<Product>> = Mutex::new(vec![]);
+    static ref TOR_PROCESS: Mutex<Option<std::process::Child>> = Mutex::new(None);
 }
 
 
@@ -36,6 +37,13 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
         .header("user-agent", &users_agents)
         .send().await?;
 
+    if res.status() != 200 {
+        println!("{}", res.status());
+        let mut tor_process = TOR_PROCESS.lock().unwrap();
+       
+        tor_process.replace(std::process::Command::new("tor").spawn().unwrap());
+    }
+
     // Document parsing
     let body = res.text().await?;
     let html = Html::parse_document(&body);
@@ -55,7 +63,7 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
         total+=1;
 
     }
-    println!("Percentage added: {}% ", ((total as f32-n_exists as f32)/total as f32)*100.0);
+    println!("Percentage added: {}% ", ((total as f32-n_exists as f32)/(total as f32 + f32::EPSILON))*100.0);
     Ok(())
 }
     
@@ -70,6 +78,10 @@ where P: AsRef<Path>, {
 
 #[tokio::main]
 async fn main() {
+    let mut tor_process = TOR_PROCESS.lock().unwrap();
+       
+    tor_process.replace(std::process::Command::new("tor").spawn().unwrap());
+
     if let Ok(lines) = read_lines("top.csv") {
         // Consumes the iterator, returns an (Optional) String
         for line in lines.flatten() {
