@@ -72,6 +72,21 @@ impl Product
         };
             
         
+        // Select the images url
+        let mut images_url = Vec::new();
+        for image in element.select(&images_selector) {
+            if let Some(url) = image.value().attr("srcset") {
+                url.split(',').for_each(|url| {
+                    let s = url.replace("https://m.media-amazon.com/images/I/", "").split(' ').next().unwrap_or("").to_string();
+
+                    if s.len() > 1{
+                         images_url.push(s[1..].split(' ').next().unwrap().to_string());
+
+                    }
+                });
+            }
+        }
+            
         let product = Product{
             id,
             title,
