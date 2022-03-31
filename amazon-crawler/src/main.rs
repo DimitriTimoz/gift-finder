@@ -64,6 +64,7 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
 
     }
     println!("Percentage added: {}% ", ((total as f32-n_exists as f32)/(total as f32 + f32::EPSILON))*100.0);
+    println!("Total: {}", products.len());
     Ok(())
 }
     
@@ -91,8 +92,6 @@ async fn main() {
                     Ok(_) => {},
                     Err(e) => println!("{}", e),
                 }
-                let products = PRODUCTS.lock().unwrap();
-                println!("{} produits", products.len());
             }
             let products = PRODUCTS.lock().unwrap();
 
@@ -102,7 +101,5 @@ async fn main() {
         }
     }
    
-    
-
     
 }
