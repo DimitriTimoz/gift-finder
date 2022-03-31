@@ -37,7 +37,7 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
     let body = res.text().await?;
     let html = Html::parse_document(&body);
 
-    let s_selector = Selector::parse("div[data-asin]").unwrap();
+    let s_selector = Selector::parse("div[data-component-type='s-search-result']").unwrap();
     let mut products = PRODUCTS.lock().unwrap();
     let mut total=0;
     let mut n_exists=0;
@@ -71,9 +71,11 @@ async fn main() {
         for line in lines.flatten() {
 
             for i in  1..7{
-                let _re = get_amazon_product_list(&format!("https://www.amazon.fr/s?k={}&page={}",line, i)).await;
+                match get_amazon_product_list(&format!("https://www.amazon.fr/s?k={}&page={}",line, i)).await{
+                    Ok(_) => {},
+                    Err(e) => println!("{}", e),
+                }
                 let products = PRODUCTS.lock().unwrap();
-                thread::sleep(time::Duration::from_millis(1000));
                 println!("{} produits", products.len());
                 
 
