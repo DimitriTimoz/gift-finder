@@ -68,7 +68,7 @@ where P: AsRef<Path>, {
 
 #[tokio::main]
 async fn main() {
-    if let Ok(lines) = read_lines("top.json") {
+    if let Ok(lines) = read_lines("top.csv") {
         // Consumes the iterator, returns an (Optional) String
         for line in lines.flatten() {
 
