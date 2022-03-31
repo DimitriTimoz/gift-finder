@@ -8,6 +8,7 @@ use crate::product::*;
 use lazy_static::lazy_static; use core::time;
 // 1.4.0
 use std::{sync::Mutex, path::Path, io::{self, BufRead}, fs::File, thread};
+use rand::Rng;
 
 
 lazy_static! {
