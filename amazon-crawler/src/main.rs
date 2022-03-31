@@ -5,9 +5,9 @@ pub mod product;
 
 use scraper::{Html, Selector};
 use crate::product::*;
-use lazy_static::lazy_static; use core::time;
-// 1.4.0
-use std::{sync::Mutex, path::Path, io::{self, BufRead}, fs::File, thread};
+use lazy_static::lazy_static; 
+
+use std::{sync::Mutex, path::Path, io::{self, BufRead}, fs::File};
 use rand::Rng;
 
 
@@ -50,8 +50,9 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
             }else {
                 n_exists+=1;
             }
-            total+=1;
         }
+        total+=1;
+
     }
     println!("{}/{} ", total-n_exists ,total);
     Ok(())
@@ -79,8 +80,6 @@ async fn main() {
                 }
                 let products = PRODUCTS.lock().unwrap();
                 println!("{} produits", products.len());
-                
-
             }
             let products = PRODUCTS.lock().unwrap();
 
