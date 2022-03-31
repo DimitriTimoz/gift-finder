@@ -1,4 +1,4 @@
-
+pub mod request_manager;
 pub mod product;
 
 
@@ -36,6 +36,7 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
         .header("user-agent", &users_agents)
         .send().await?;
 
+    // Document parsing
     let body = res.text().await?;
     let html = Html::parse_document(&body);
 
@@ -54,7 +55,7 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
         total+=1;
 
     }
-    println!("{}/{} ", total-n_exists ,total);
+    println!("Percentage added: {}% ", ((total as f32-n_exists as f32)/total as f32)*100.0);
     Ok(())
 }
     
