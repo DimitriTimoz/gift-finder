@@ -39,8 +39,12 @@ async fn get_amazon_product_list(url: &str) -> Result<(), reqwest::Error> {
 
     if res.status() != 200 {
         println!("{}", res.status());
-        let mut tor_process = TOR_PROCESS.lock().unwrap();
+        let mut tor_process = TOR_PROCESS.lock().unwrap().take();
        
+        if let Some(mut p) = tor_process.take(){
+            p.kill().unwrap();
+            tor_process = None;
+        }
         tor_process.replace(std::process::Command::new("tor").spawn().unwrap());
     }
 
@@ -96,10 +100,10 @@ async fn main() {
             let products = PRODUCTS.lock().unwrap();
 
             let _ = serde_json::to_writer(&File::create("data.json").unwrap(), &products.as_slice());
-                
-            
         }
     }
-   
-    
-}
+    let mut tor_process = TOR_PROCESS.lock().unwrap().take();
+       
+    if let Some(mut p) = tor_process.take(){
+        p.kill().unwrap();
+    }}
