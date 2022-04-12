@@ -1,15 +1,39 @@
+use std::{collections::HashMap, hash::Hash};
+
 use scraper::{Selector, ElementRef};
 use serde::{Deserialize, Serialize};
+use chrono::prelude::*;
 
+#[derive(Debug, Default)]
+pub struct Products{
+    pub saved_products: HashMap<String, SavedProduct>,
+    pub to_save: HashMap<String, Product>,
+    pub key_words: HashMap<String, bool>,
+}
 
-
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum Plarform {
     Amazon,
 }
 
+impl Plarform {
+    pub fn from_string(s: &str) -> Option<Self> {
+        match s {
+            "1" => Some(Plarform::Amazon),
+            _ => None,
+        }
+    }
+}
 
-#[derive(Debug, Serialize, Deserialize)]
+impl ToString for Plarform {
+    fn to_string(&self) -> String {
+        match self {
+            Plarform::Amazon => "1".to_string(),
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
 
 pub struct Product {
     pub id: String,
@@ -18,7 +42,8 @@ pub struct Product {
     pub platform: Plarform,
     pub images_url: Vec<String>,
     pub review: Option<f32>,
-    pub nb_review: Option<usize>,
+    pub nb_review: Option<u32>,
+    pub date: DateTime<Utc>,
 }
 
 impl Product 
@@ -28,8 +53,8 @@ impl Product
         // List of css selectors
         let title_selector = Selector::parse("h2>a>span").unwrap();
         let price = Selector::parse("span[class='a-price-whole']").unwrap();
-
         let review_selector = Selector::parse("a>i>span").unwrap();
+        let nb_review_selector = Selector::parse("a>span[class='a-size-base s-underline-text']").unwrap();
         let images_selector = Selector::parse("img[class='s-image']").unwrap();
         
         // Select the id of the product
@@ -59,7 +84,6 @@ impl Product
         // Select review average
         let review = match element.select(&review_selector).next() {
             Some(v) => {
-               
                 let v4 = v.inner_html().replace(',', ".");
                 match v4[0..3].parse::<f32>() {
                     Ok(v) => {
@@ -70,8 +94,24 @@ impl Product
             },
             None => None,
         };
-            
         
+        // Select the number of review if exists
+        let nb_review = if review.is_some() {
+            match element.select(&nb_review_selector).next() {
+                Some(v) => {
+                    let v1 = v.inner_html();
+                    match v1.parse::<u32>() {
+                        Ok(v) => {
+                            Some(v)
+                        },
+                        Err(_) => None,
+                    }                
+                },
+                None => None,
+            }
+        }
+        else {None};
+
         // Select the images url
         let mut images_url = Vec::new();
         for image in element.select(&images_selector) {
@@ -94,11 +134,40 @@ impl Product
             platform: Plarform::Amazon,
             images_url,
             review,
-            nb_review: None,
+            nb_review,
+            date: Utc::now(),
         };
         Some(product)
     }
+
+    pub fn to_csv_line(&self) -> String{
+        let p = self.review.map(|v| format!("{}", v)).unwrap_or_else(|| "null".to_string()).replace(';', "%3B");
+        let v =  self.nb_review.map(|v| format!("{}", v)).unwrap_or_else(|| "null".to_string()).replace(';', "%3B");
+        format!("\n{};{};{};{};{};{};{};{}", self.id.replace(';', "%3B"), self.title.replace(';', "%3B"), self.price, self.platform.to_string(), self.images_url.join(",").replace(';', "%3B"), p, v, self.date.to_rfc3339())
+    }
+    
+    pub fn header_csv() -> String{
+        "id;title;price;platform;images_url;review;nb_review;date".to_string()
+    }
 }
     
+#[derive(Debug, Clone)]
+pub struct SavedProduct{
+    pub id: String,
+    pub last_update: DateTime<Utc>,
+    pub plarform: Plarform,
+}
 
+impl SavedProduct{
+    pub fn to_csv_line(&self) -> String {
+        format!("{},{},{}", self.id, self.last_update.to_rfc3339(), self.plarform.to_string())
+    }
 
+    pub fn from_product(product: &Product) -> Self{
+        SavedProduct {
+            id: product.id.clone(),
+            last_update: Utc::now(),
+            plarform: product.platform.clone(),
+        }
+    }
+}
