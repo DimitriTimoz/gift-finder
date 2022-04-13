@@ -1,5 +1,5 @@
-use std::{collections::HashMap, hash::Hash};
-
+use std::{collections::HashMap, fs, io::Write};
+use crate::common::*;
 use scraper::{Selector, ElementRef};
 use serde::{Deserialize, Serialize};
 use chrono::prelude::*;
@@ -11,12 +11,57 @@ pub struct Products{
     pub key_words: HashMap<String, bool>,
 }
 
+impl Products{
+    pub fn save_key_words(&mut self, file_name: &str){
+        let mut file = fs::OpenOptions::new()
+                                    .write(true)
+                                    .open(file_name).unwrap();
+        for (key_word, saved) in &self.key_words {
+            let line = format!("{};{}\n", key_word, saved);
+            file.write_all(line.as_bytes()).unwrap();
+        }
+    }
+
+    pub fn load_key_words(&mut self, file_name: &str){
+        let lines = read_lines(file_name);
+        for line in lines.unwrap().flatten(){
+            let args = line.split(';').collect::<Vec<&str>>();
+            if args.len() > 1{
+                self.key_words.insert(args[0].to_string(), args[1].parse::<bool>().unwrap());
+            }else{
+                // To add keywords without specify if they already have been searched
+                self.key_words.insert(args[0].to_string(), false);
+            }
+        }
+    }
+
+
+pub fn save_products(&mut self) {
+    // Save products to csv format
+    let mut file = fs::OpenOptions::new()
+                        .write(true)
+                        .append(true)
+                        .open("products.csv").unwrap();
+    if self.saved_products.is_empty() {
+        file.write_all(Product::header_csv().as_bytes()).unwrap();
+    }
+    for (id, product) in self.to_save.clone() {
+        let record = product.to_csv_line();
+        file.write_all(record.as_bytes()).unwrap();
+        self.saved_products.insert(id.clone(), SavedProduct::from_product(&product));
+    }   
+    self.to_save.clear();
+}
+
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum Plarform {
     Amazon,
 }
 
 impl Plarform {
+    #[inline]
     pub fn from_string(s: &str) -> Option<Self> {
         match s {
             "1" => Some(Plarform::Amazon),
@@ -26,6 +71,7 @@ impl Plarform {
 }
 
 impl ToString for Plarform {
+    #[inline]
     fn to_string(&self) -> String {
         match self {
             Plarform::Amazon => "1".to_string(),
@@ -145,7 +191,8 @@ impl Product
         let v =  self.nb_review.map(|v| format!("{}", v)).unwrap_or_else(|| "null".to_string()).replace(';', "%3B");
         format!("\n{};{};{};{};{};{};{};{}", self.id.replace(';', "%3B"), self.title.replace(';', "%3B"), self.price, self.platform.to_string(), self.images_url.join(",").replace(';', "%3B"), p, v, self.date.to_rfc3339())
     }
-    
+
+    #[inline]
     pub fn header_csv() -> String{
         "id;title;price;platform;images_url;review;nb_review;date".to_string()
     }
@@ -159,10 +206,12 @@ pub struct SavedProduct{
 }
 
 impl SavedProduct{
+    #[inline]
     pub fn to_csv_line(&self) -> String {
         format!("{},{},{}", self.id, self.last_update.to_rfc3339(), self.plarform.to_string())
     }
 
+    #[inline]
     pub fn from_product(product: &Product) -> Self{
         SavedProduct {
             id: product.id.clone(),
