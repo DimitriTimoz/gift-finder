@@ -1,0 +1,5 @@
+The main page of the product:
+https://www.amazon.fr/dp/[PID]
+
+The comments page of the product:
+https://www.amazon.fr/product-reviews/[PID]

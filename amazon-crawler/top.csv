@@ -1,297 +1,453 @@
-bed;true
-;true
-Instruments de musique et Sono;true
-trumpet;false
-remote;false
-Lantern;false
-bijoux femme;false
-panier chien;false
-enceinte bluetooth jbl;true
-horse;false
-rose eternelle sous cloche;false
-bicycle;false
-tennis racket;false
-vitamine c;false
-Animalerie;false
-Bijoux homme;false
-mistletoe;false
-chat;false
-iphone 13 pro max;false
-photograph;false
-vase;false
-pizza;false
-Chaussures et Sacs;false
-teddy bear;false
-cup;false
-Boutique Kindle;false
-valise;false
-Jardin;false
-pipe;false
-Livres;false
-truck;false
-tapis de souris;false
-spade;false
-fog ;false
-bear;false
-gates ;false
-umbrella;false
-bowl;false
-jouet chien;false
-keyboard;false
-cat;false
-coque iphone 13 pro max;false
-enceinte bluetooth;false
-fire hydrant;false
-broccoli;false
-jogging homme;false
-skateboard;false
-giraffe;false
-make Up;false
-tv;false
-bones ;false
-ladder;false
-crown;false
-pumpkin;false
-window;false
-coin;false
-montre connectée femme;false
-ecouteurs bluetooth sans fil;false
-support telephone voiture;false
-Bijoux;false
-veilleuse;false
-Montres;false
-zebra;false
-Vêtements;false
-Fournitures de bureau;false
-ordinateur portable;false
-seche cheveux;false
-Bébé et Puériculture;false
-lampe torche;false
-aspirateur sans sac;false
-bracelet apple watch;false
-key;false
-carrot;false
-blender;false
-nintendo switch lite;false
-diffuseur huiles essentielles;false
-bus;false
-ring light;false
-desk;false
-Auto et Moto;false
-coque iphone 11;false
-angel;false
-verre trempé iphone 11;false
-street sign;false
-cow;false
-drap housse 140x190;false
-book;false
-sac a dos;false
-sheep;false
-weapons;false
-door;false
-airplane;false
-motorcycle;false
-elephant;false
-booster batterie voiture;false
-briefcase;false
-bulb;false
-butterfly;false
-shell;false
-Hygiène et Santé;false
-horseshoe;false
-Jeux vidéo;false
-jeux switch;false
-water;false
-nespresso machine a café;false
-Luminaires et Éclairage;false
-clock;false
-disque dur externe;false
-Sports et Loisirs;false
-parasol;false
-baseball glove;false
-feather;false
-veste chauffante homme;false
-nintendo switch;false
-usb c;false
-apple;false
-train;false
-bible ;false
-spoon;false
-chair;false
-Epicerie;false
-Téléchargement de Musique;false
-Gros électroménager;false
-telephone portable;false
-couch;false
-ballon;false
-Beauté et Parfum;false
-Livres et œuvres originales Audible;false
-car;false
-ecran pc;false
-laptop;false
-potted plant;false
-baseball bat;false
-Appareils Amazon et Accessoires;false
-wrist watch	;false
-handbag;false
-harry potter;false
-hearth;false
-gavel;false
-person;false
-jean homme;false
-apple	;false
-torch ;true
-boat;false
-xiaomi redmi note 11;false
-pc;false
-tee shirt homme;false
-boxer homme;false
-suitcase;false
-fork;false
-led;false
-cake;false
-orange;false
-banana;false
-CD et Vinyles;false
-switch;false
-collier anti aboiement chien;false
-storm;false
-Applis et Jeux;false
-diamond painting;false
-manette switch;false
-chaussures de sécurité hommes;false
-shoe;false
-Produits Handmade;false
-cell phone;false
-chien;false
-Bijoux enfant;false
-arrow;false
-sports ball;false
-housse de couette 220x240;false
-toilet;false
+ecran pc;true
+Chaussures et Sacs;true
 tondeuse cheveux hommes;true
-traffic light;false
-Jeux et Jouets;false
-plate;false
-knife;false
-Bagages;false
-apple watch serie 7;false
-bouilloire electrique;false
-diamond painting personnalisé;false
-brosse à dent électrique;false
-four-leaf clover;false
-frisbee;true
-hair brush;false
-macbook air;false
-t shirt homme;false
-samsung a12;true
-vernis semi permanent;false
-kite;false
-coque iphone 12;false
-hourglasses;false
-toaster;false
-pc gamer;false
-snow ;false
-compass;false
-tableau blanc;false
-flowers;false
-legging de sport femme;false
-snowboard;false
-backpack;false
-pen ;false
-balance de cuisine;false
-toothbrush;false
-Informatique;false
-matelas 140x190;false
-pram;false
-bench;false
-anchor;false
-piano ;false
-stars ;false
-Porte clés;false
-eye glasses;false
-candle;false
-dog;false
-amazon;false
-bird;false
-lego star wars;false
-lego;false
-Cuisine et Maison;false
-manette ps4;false
-Cadre;false
-veilleuse enfant;false
-bell;false
-zelda breath of the wild switch;false
-imprimante;false
-coque iphone 13;false
-hot dog;false
-Décoration;false
-delonghi;false
-dining table;false
-Déguisement;false
-grille pain;false
-aspirateur sans fil;false
-stop sign;false
-masque enfant;false
-donut;false
-hammer;false
-camera;false
-olive branch;false
-purse ;false
-iphone 12 pro max;false
-scissors;false
-iphone 13 pro;false
-parking meter;false
-lego harry potter;false
-skis;false
-mouse;false
-rope;false
-kindle paperwhite 2021;false
-xiaomi redmi note 10 pro;false
-High-Tech;false
-cartouche hp 302;false
-souris sans fil;false
-tie;true
-Bricolage;false
-gourde enfant;false
-coffin;false
-DVD et Blu-ray;false
-refrigerator;false
-humidificateur d'air;false
-harp;false
-Bijoux femme;false
-jouet chat;false
-dove ;false
-pet ;false
+valise;true
+window;true
+bench;true
+orange;true
+Livres;true
+carrot;true
+desk;true
+vitamine c;true
+DVD et Blu-ray;true
+four-leaf clover;true
+jouet chat;true
+Bébé et Puériculture;true
+Cadre;true
+masque enfant;true
+souris sans fil;true
+plate;true
+cat;true
+grille pain;true
+Décoration;true
+parking meter;true
+bowl;true
+coque iphone 12;true
+potted plant;true
+jogging homme;false
+booster batterie voiture;true
+pet ;true
+chaussures de sécurité hommes;false
 oculus quest 2;false
-microwave;false
-wine glass;false
-harnais chien;false
-leader;false
-sandwich;false
-surfboard;true
-montre connectée homme;false
-macbook pro;false
-seed ;false
-urn ;false
-staff;false
-sac isotherme repas;false
-chain ;false
+Bijoux homme;false
+telephone portable;false
+gourde enfant;false
 hat;false
-leggings femme;false
-drap housse 160 x 200;false
-multiprise electrique;false
-xiaomi redmi note 10;false
+zelda breath of the wild switch;false
+dining table;true
+laptop;true
+chat;true
+frisbee;true
+iphone 13 pro;true
+bible ;false
+pc;false
+pipe;false
+bicycle;false
+Jardin;true
+torch ;true
+nespresso machine a café;true
+bear;true
+pizza;false
+street sign;true
+lampe torche;false
+switch;true
+;false
+shoe;true
+snowboard;true
 mirror;false
-bottle;false
-hair drier;false
-batterie externe;false
-Livres anglais et étrangers;false
-bureau;false
-aspirateur;false
-knot;false
-sink;false
+pumpkin;true
+angel;true
+apple watch serie 7;true
+bracelet apple watch;true
+xiaomi redmi note 10;false
+panier chien;false
+diamond painting;false
+compass;true
+bijoux femme;false
+ring light;false
+Applis et Jeux;true
+housse de couette 220x240;true
+broccoli;true
+Epicerie;true
+Téléchargement de Musique;false
+manette ps4;true
+humidificateur d'air;false
+tie;true
+hourglasses;true
+drap housse 160 x 200;false
+camera;true
+remote;true
+diamond painting personnalisé;true
+kite;true
 clouds;false
-oven;false
+cake;true
+ordinateur portable;true
+drap housse 140x190;false
+stars ;false
+coque iphone 13;true
+jouet chien;false
+storm;false
+seche cheveux;false
+refrigerator;true
+hammer;false
+toothbrush;true
+dove ;false
+tee shirt homme;false
+staff;false
+surfboard;true
+book;false
+nintendo switch;true
+lego star wars;true
+manette switch;true
+enceinte bluetooth jbl;true
+truck;true
+sheep;false
+bones ;true
+batterie externe;false
+door;true
+Livres et œuvres originales Audible;false
+eye glasses;true
+xiaomi redmi note 10 pro;false
+fire hydrant;true
+Montres;false
+baseball bat;true
+gavel;false
+donut;true
+urn ;true
+hair brush;false
+apple	;true
+coque iphone 13 pro max;true
+hearth;true
+Lantern;true
+umbrella;true
+Luminaires et Éclairage;true
+mouse;false
+rope;true
+Auto et Moto;true
+usb c;false
+motorcycle;false
+Porte clés;true
+dog;false
+gates ;false
+kindle paperwhite 2021;true
+sac isotherme repas;true
+tv;false
+baseball glove;true
+samsung a12;true
+Boutique Kindle;false
+leggings femme;false
+pc gamer;true
+airplane;true
+hair drier;true
+traffic light;false
+macbook air;false
+apple;false
+Jeux et Jouets;true
+bus;true
+aspirateur;true
+clock;false
+backpack;false
+tableau blanc;false
+bird;false
+Bijoux femme;false
+keyboard;false
+seed ;true
+coque iphone 11;true
+sink;true
+chain ;true
+Informatique;true
+boat;false
+cell phone;true
+teddy bear;true
+cup;true
+Fournitures de bureau;true
+coin;false
+xiaomi redmi note 11;false
+briefcase;false
+Appareils Amazon et Accessoires;false
+fog ;true
+enceinte bluetooth;false
+key;true
+Bagages;false
+aspirateur sans fil;true
+mistletoe;false
+nintendo switch lite;false
+lego;true
+sports ball;true
+vernis semi permanent;false
+giraffe;true
+flowers;false
+Jeux vidéo;false
+elephant;true
+Animalerie;true
+Vêtements;false
+photograph;false
+harnais chien;false
+butterfly;true
+oven;true
+Bijoux;false
+pen ;false
+Beauté et Parfum;true
+sandwich;true
+couch;true
+jean homme;true
+aspirateur sans sac;false
+fork;true
+bottle;true
+montre connectée femme;false
+arrow;false
+montre connectée homme;false
+t shirt homme;true
+coffin;false
+Bijoux enfant;false
+imprimante;true
+chien;true
+piano ;true
+spoon;true
+ladder;true
+Déguisement;false
+vase;true
+suitcase;false
+collier anti aboiement chien;false
+veilleuse enfant;false
+lego harry potter;true
+High-Tech;false
+veilleuse;true
+rose eternelle sous cloche;false
+microwave;false
+legging de sport femme;false
+horseshoe;false
+purse ;false
+snow ;false
+crown;false
+wrist watch	;false
+bouilloire electrique;false
+cow;false
+cartouche hp 302;false
+tennis racket;true
+handbag;true
+chair;true
+bulb;false
+zebra;true
+balance de cuisine;true
+train;false
+banana;true
+Instruments de musique et Sono;true
+matelas 140x190;true
+ecouteurs bluetooth sans fil;true
+toaster;true
+scissors;false
+skis;false
+spade;false
+anchor;true
+knife;false
+feather;false
+ballon;true
+delonghi;true
+CD et Vinyles;false
+skateboard;true
+Produits Handmade;false
+make Up;false
+brosse à dent électrique;false
+amazon;false
+shell;true
+blender;true
+iphone 13 pro max;false
+bureau;true
+veste chauffante homme;false
+jeux switch;true
+harry potter;true
+multiprise electrique;true
+person;true
+led;false
+Livres anglais et étrangers;false
+bed;true
+diffuseur huiles essentielles;false
+bell;true
+Hygiène et Santé;false
+verre trempé iphone 11;true
+tapis de souris;true
+boxer homme;false
+macbook pro;false
+leader;false
+hot dog;false
+car;true
+parasol;true
+trumpet;false
+iphone 12 pro max;false
+toilet;true
+horse;false
+sac a dos;false
+harp;true
+candle;false
+weapons;false
+water;false
+Gros électroménager;true
+stop sign;true
+pram;true
+Bricolage;true
+support telephone voiture;true
+wine glass;false
+Cuisine et Maison;true
+knot;true
+Sports et Loisirs;false
+disque dur externe;true
+olive branch;true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
